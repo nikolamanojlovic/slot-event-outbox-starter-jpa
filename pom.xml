@@ -7,25 +7,19 @@
     <version>1.0-SNAPSHOT</version>
     <name>slot-event-outbox-starter-jpa</name>
 
+    <repositories>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/nikolamanojlovic/slot-commons</url>
+        </repository>
+    </repositories>
+
     <properties>
         <java.version>21</java.version>
         <spring.boot.version>3.3.1</spring.boot.version>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
     </properties>
-
-    <repositories>
-        <repository>
-            <id>github</id>
-            <url>https://maven.pkg.github.com/nikolamanojlovic/slot-commons</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
 
     <dependencies>
         <dependency>
