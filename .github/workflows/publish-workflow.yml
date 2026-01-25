@@ -19,7 +19,7 @@ jobs:
           java-version: 21
           distribution: 'temurin'
           server-id: github
-          server-username: ${{ github.actor }}
+          server-username: nikolamanojlovic
           server-password: ${{ secrets.SLOT_COMMONS_READ_TOKEN }}
 
       - name: Build JAR
