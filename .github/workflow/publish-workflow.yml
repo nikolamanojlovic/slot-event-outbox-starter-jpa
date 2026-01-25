@@ -20,7 +20,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Build JAR
-        run: ./mvnw clean package -DskipTests=false
+        run: ./mvnw clean package
 
       - name: Publish JAR to GitHub Packages
         run: ./mvnw deploy -DskipTests
