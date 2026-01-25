@@ -20,7 +20,7 @@ jobs:
           distribution: 'temurin'
           server-id: github
           server-username: nikolamanojlovic
-          server-password: ${{ secrets.SLOT_COMMONS_READ_TOKEN }}
+          server-password: ${{ secrets.SLOT_TOKEN }}
 
       - name: Build JAR
         run: ./mvnw clean package
@@ -28,4 +28,4 @@ jobs:
       - name: Publish JAR to GitHub Packages
         run: ./mvnw deploy -DskipTests
         env:
-          GITHUB_TOKEN: ${{ secrets.SLOT_EVENT_OUTBOX_JPA_STARTER_DEPLOY_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.SLOT_TOKEN }}
