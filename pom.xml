@@ -4,7 +4,7 @@
     <groupId>com.heapik.slot.outbox</groupId>
     <artifactId>slot-event-outbox-starter-jpa</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <name>slot-event-outbox-starter-jpa</name>
 
     <repositories>
@@ -66,7 +66,7 @@
         <dependency>
             <groupId>com.heapik.slot</groupId>
             <artifactId>commons-event</artifactId>
-            <version>1.0.4</version>
+            <version>1.0.5</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
