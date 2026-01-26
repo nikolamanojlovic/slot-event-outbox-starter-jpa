@@ -4,7 +4,7 @@
     <groupId>com.heapik.slot.outbox</groupId>
     <artifactId>slot-event-outbox-starter-jpa</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.5</version>
+    <version>1.0.6</version>
     <name>slot-event-outbox-starter-jpa</name>
 
     <repositories>

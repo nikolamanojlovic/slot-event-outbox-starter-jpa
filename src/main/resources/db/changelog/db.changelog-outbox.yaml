@@ -1,11 +1,11 @@
 databaseChangeLog:
   - property:
       name: schemaName
-      value: ${slot.event.outbox.schema-name:public}
+      value: ${liquibase.defaultSchemaName}  # picked from Spring Boot default-schema
 
   - changeSet:
       id: 001-create-event-outbox-table
-      author: ${spring.application.name}-system
+      author: ${schemaName}-system   # dynamic author based on schema
       changes:
         - sql:
             sql: |
@@ -26,7 +26,7 @@ databaseChangeLog:
 
   - changeSet:
       id: 002-add-unpublished-index
-      author: ${spring.application.name}-system
+      author: ${schemaName}-system
       changes:
         - sql:
             sql: |
@@ -39,7 +39,7 @@ databaseChangeLog:
 
   - changeSet:
       id: 003-create-event-outbox-cursor-table
-      author: ${spring.application.name}-system
+      author: ${schemaName}-system
       changes:
         - sql:
             sql: |
