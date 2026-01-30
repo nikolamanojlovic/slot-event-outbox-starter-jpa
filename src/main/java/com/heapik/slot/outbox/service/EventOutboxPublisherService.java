@@ -46,12 +46,14 @@ public class EventOutboxPublisherService {
     }
 
     @Transactional
-    public void updateBatchAndCursor(List<EventOutbox> batch, EventOutboxCursor cursor) {
+    public void updateBatch(List<EventOutbox> batch) {
         eventOutboxRepositoryPort.save(batch);
+    }
 
-        cursor.setCursor(batch.getLast().getOccurredAt());
-        cursor.setTieBreaker(batch.getLast().getId());
+    @Transactional
+    public void updateLastSuccessfulCursor(EventOutboxCursor cursor, EventOutbox lastEvent) {
+        cursor.setCursor(lastEvent.getOccurredAt());
+        cursor.setTieBreaker(lastEvent.getId());
         eventOutboxCursorRepositoryPort.save(cursor);
-
     }
 }

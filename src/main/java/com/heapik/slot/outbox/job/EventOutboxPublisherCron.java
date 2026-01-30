@@ -1,12 +1,15 @@
 package com.heapik.slot.outbox.job;
 
 import com.heapik.slot.commonsevent.domain.Event;
+import com.heapik.slot.commonsevent.domain.outbox.EventOutbox;
 import com.heapik.slot.commonsevent.ports.publisher.EventPublisherPort;
 import com.heapik.slot.outbox.autoconfig.EventOutboxProperties;
 import com.heapik.slot.outbox.service.EventOutboxPublisherService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
+
+import java.util.ArrayList;
 
 public class EventOutboxPublisherCron {
 
@@ -35,6 +38,7 @@ public class EventOutboxPublisherCron {
                 return;
             }
 
+            var success = new ArrayList<EventOutbox>();
             LOGGER.info("Publishing {} events for cursor {}, {}", batch.size(), pagination.getCursor(), pagination.getTieBreaker());
             for (var event : batch) {
                 var send = new Event<>(
@@ -46,6 +50,7 @@ public class EventOutboxPublisherCron {
                 try {
                     eventPublisherPort.publish(send);
                     event.published();
+                    success.add(event);
                     LOGGER.debug("Succeeded to publish event {}, outbox id: {}",
                             event.getEventType(),
                             event.getId().toString());
@@ -60,7 +65,12 @@ public class EventOutboxPublisherCron {
                 }
             }
 
-            eventOutboxPublisherService.updateBatchAndCursor(batch, pagination);
+            eventOutboxPublisherService.updateBatch(batch);
+
+            if (!success.isEmpty()) {
+                LOGGER.debug("Updating last successful cursor to {} {}", success.getLast().getId(), success.getLast().getOccurredAt());
+                eventOutboxPublisherService.updateLastSuccessfulCursor(pagination, success.getLast());
+            }
 
             if (batch.size() < properties.getBatchSize()) {
                 LOGGER.info("Finished processing outbox events.");
