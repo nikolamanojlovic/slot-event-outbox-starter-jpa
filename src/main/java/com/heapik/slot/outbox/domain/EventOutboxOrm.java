@@ -1,9 +1,12 @@
 package com.heapik.slot.outbox.domain;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.heapik.slot.commonsevent.domain.outbox.EventOutbox;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.type.SqlTypes;
 
 import java.time.Instant;
 import java.util.UUID;
@@ -24,8 +27,9 @@ public class EventOutboxOrm {
     @Column(name = "event_type", nullable = false)
     private String eventType;
 
+    @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "payload", columnDefinition = "jsonb", nullable = false)
-    private String payload;
+    private JsonNode payload;
 
     @Column(name = "occurred_at", nullable = false)
     private Instant occurredAt;
@@ -50,7 +54,7 @@ public class EventOutboxOrm {
     public EventOutboxOrm() {
     }
 
-    public EventOutboxOrm(String eventType, String payload, Instant occurredAt) {
+    public EventOutboxOrm(String eventType, JsonNode payload, Instant occurredAt) {
         this.eventType = eventType;
         this.payload = payload;
         this.occurredAt = occurredAt;
@@ -59,7 +63,7 @@ public class EventOutboxOrm {
         this.errorMessage = null;
     }
 
-    private EventOutboxOrm(String eventType, String payload, Instant occurredAt, boolean published, int retryCount, String errorMessage) {
+    private EventOutboxOrm(String eventType, JsonNode payload, Instant occurredAt, boolean published, int retryCount, String errorMessage) {
         this.eventType = eventType;
         this.payload = payload;
         this.occurredAt = occurredAt;
@@ -87,7 +91,7 @@ public class EventOutboxOrm {
         return eventType;
     }
 
-    public String getPayload() {
+    public JsonNode getPayload() {
         return payload;
     }
 

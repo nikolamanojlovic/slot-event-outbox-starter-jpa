@@ -33,8 +33,8 @@ public class EventOutboxRepositoryAdapter implements EventOutboxRepositoryPort {
     }
 
     @Override
-    public void saveEvent(Event<?> event) throws Exception {
-        var outbox = new EventOutboxOrm(event.eventType(), objectMapper.writeValueAsString(event.payload()), event.occurredAt());
+    public void saveEvent(Event<?> event) {
+        var outbox = new EventOutboxOrm(event.eventType(), objectMapper.valueToTree(event.payload()), event.occurredAt());
         eventOutboxJpaRepository.save(outbox);
     }
 }

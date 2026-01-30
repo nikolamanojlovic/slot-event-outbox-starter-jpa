@@ -4,7 +4,7 @@
     <groupId>com.heapik.slot.outbox</groupId>
     <artifactId>slot-event-outbox-starter-jpa</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.7</version>
+    <version>1.0.8</version>
     <name>slot-event-outbox-starter-jpa</name>
 
     <repositories>
@@ -41,12 +41,6 @@
             <version>${spring.boot.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.20.1</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <version>${spring.boot.version}</version>
@@ -60,7 +54,7 @@
         <dependency>
             <groupId>com.heapik.slot</groupId>
             <artifactId>commons-event</artifactId>
-            <version>1.0.5</version>
+            <version>1.0.6</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
